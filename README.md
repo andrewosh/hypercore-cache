@@ -1,4 +1,6 @@
 # hypercore-cache
+[![Build Status](https://travis-ci.com/andrewosh/hypercore-cache.svg?token=WgJmQm3Kc6qzq1pzYrkx&branch=master)](https://travis-ci.com/andrewosh/hypercore-cache)
+
 A caching module for Hypercore tree nodes and blocks.
 
 This module mplements the [hashlru](https://github.com/dominictarr/hashlru) algorithm internally for LRU caching, but it uses byte length estimates instead of the entry count for eviction.
