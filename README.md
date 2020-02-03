@@ -33,7 +33,7 @@ Gets the value for `key`.
 #### `cache.del(key)`
 Deletes `key` from the cache.
 
-#### `const subCache = cache.namespace(name)`
+#### `const subCache = cache.namespace()`
 Creates a namespaced sub-cache which mirrors the hypercore-cache API.
 
 This is useful if you want to create a single cache instance that manages resources for multiple hypercores.
