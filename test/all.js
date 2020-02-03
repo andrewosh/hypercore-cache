@@ -155,6 +155,33 @@ test('removal without namespaces, entry in stale', t => {
   t.end()
 })
 
+test('removal without namespaces, entry in both stale and fresh', t => {
+  const cache = new HypercoreCache({ maxByteSize: 1024 * 2 })
+  const aVal = Buffer.from('a')
+  const bVal = Buffer.from('b')
+  const cVal = Buffer.from('c')
+  const dVal = Buffer.from('c')
+
+  debugSet(cache, 'a', aVal)
+  debugSet(cache, 'b', bVal)
+  debugSet(cache, 'c', cVal)
+  debugSet(cache, 'a', dVal)
+
+  t.same(cache.byteSize, 1024 * 4)
+  t.same(cache.get('a'), dVal)
+
+  cache.del('a')
+  t.same(cache.byteSize, 1024 * 2)
+  t.same(cache._freshByteSize, 1024 * 1)
+  t.same(cache._staleByteSize, 1024 * 1)
+
+  t.false(cache.get('a'))
+  t.same(cache.get('b'), bVal)
+  t.same(cache.get('c'), cVal)
+
+  t.end()
+})
+
 test('custom size estimator', t => {
   const cache = new HypercoreCache({ maxByteSize: 1, estimateSize: val => val.length })
   const aVal = Buffer.from('a')
