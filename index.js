@@ -82,7 +82,6 @@ module.exports = class HypercoreCache {
     if (val) {
       this._stale.delete(prefixedKey)
       this._staleByteSize -= this.estimateSize(val)
-      return
     }
     val = this._fresh.get(prefixedKey)
     if (val) {
