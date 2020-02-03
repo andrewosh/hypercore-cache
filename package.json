@@ -1,6 +1,6 @@
 {
   "name": "hypercore-cache",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A caching module for Hypercore tree nodes and blocks ",
   "main": "index.js",
   "scripts": {
