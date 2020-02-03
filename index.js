@@ -2,7 +2,7 @@ const DEFAULT_MAX_BYTE_SIZE = 1024 * 1024 * 16
 
 class NamespacedCache {
   constructor (parent, name) {
-    this.name = name
+    this._name = name
     this.parent = parent
   }
 
@@ -29,9 +29,8 @@ module.exports = class HypercoreCache {
     this.onEvict = opts.onEvict
     this.estimateSize = opts.estimateSize || defaultSize
 
-    this.defaultNamespace = 'default'
-    this.defaultCache = new NamespacedCache(this, this.defaultNamespace)
-    this.namespaces = new Map([[this.defaultNamespace, this.defaultCache]])
+    this._nextNamespace = 0
+    this.defaultCache = new NamespacedCache(this, this._nextNamespace++)
 
     this._stale = null
     this._fresh = new Map()
@@ -94,9 +93,8 @@ module.exports = class HypercoreCache {
     return this._freshByteSize + this._staleByteSize
   }
 
-  namespace (name, opts = {}) {
-    const cache = new NamespacedCache(this, name, opts)
-    this.namespaces.set(name, cache)
+  namespace () {
+    const cache = new NamespacedCache(this, this._nextNamespace++)
     return cache
   }
 
