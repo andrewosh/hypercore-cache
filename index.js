@@ -2,7 +2,7 @@ const DEFAULT_MAX_BYTE_SIZE = 1024 * 1024 * 16
 
 class NamespacedCache {
   constructor (parent, name) {
-    this._name = name
+    this.name = name
     this.parent = parent
   }
 
