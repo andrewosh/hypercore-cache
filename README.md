@@ -25,7 +25,7 @@ Options can include:
 ```
 
 #### `cache.set(key, value)`
-Sets `key` to `value`
+Sets `key` to `value`.
 
 #### `cache.get(key)`
 Gets the value for `key`.
